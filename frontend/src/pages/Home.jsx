@@ -1,17 +1,29 @@
 import MovieCard from "../components/MovieCard"
-import { useState } from "react"
+import { useState, useEffect, use } from "react"
+import { searchMovies, getPopularMovies } from "../services/api"
 
 const Home = () => {
-  const [searchQuery, setSearchQuery] = useState("")
   // const [inputValue, setInputValue] = useState("")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [movies, setMovies] = useState([])
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const movies = [
-    { id: 1, title: "Inception", release_date: "2010" },
-    { id: 2, title: "Interstellar", release_date: "2014" },
-    { id: 3, title: "The Dark Knight", release_date: "2008" },
-    { id: 4, title: "Tenet", release_date: "2020" },
-    { id: 5, title: "Dunkirk", release_date: "2017" },
-  ]
+  useEffect(() => {
+    const loadPopularMovies = async () => {
+      try {
+        const getPopularMovies = await getPopularMovies()
+        setMovies(getPopularMovies)
+      } catch (error) {
+        setError("Failed to fetch popular movies")
+        console.error("Error fetching popular movies:", error)
+      } finally {
+        setLoading(false)
+        console.log("Fetch attempt completed")
+      }
+    }
+    loadPopularMovies()
+  }, [])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -27,7 +39,7 @@ const Home = () => {
           <input
             type="text"
             placeholder="Search Movies..."
-            className="search-input w-2/5 h-12 p-3 bg-neutral-700"
+            className="search-input w-2/2 sm:w-2/5 h-12 p-3 bg-neutral-700"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
