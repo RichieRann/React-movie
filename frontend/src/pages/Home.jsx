@@ -1,5 +1,5 @@
 import MovieCard from "../components/MovieCard"
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 import { searchMovies, getPopularMovies } from "../services/api"
 
 const Home = () => {
@@ -12,11 +12,11 @@ const Home = () => {
   useEffect(() => {
     const loadPopularMovies = async () => {
       try {
-        const getPopularMovies = await getPopularMovies()
-        setMovies(getPopularMovies)
+        const PopularMovies = await getPopularMovies()
+        setMovies(PopularMovies)
       } catch (error) {
         setError("Failed to fetch popular movies")
-        console.error("Error fetching popular movies:", error)
+        console.error("Error:", error)
       } finally {
         setLoading(false)
         console.log("Fetch attempt completed")

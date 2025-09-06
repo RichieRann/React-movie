@@ -4,7 +4,7 @@ function MovieCard({ movie }) {
   }
 
   return (
-    <div className="movie-card w-80 max-h-[30rem] flex flex-col bg-neutral-800 shadow-lg rounded-lg overflow-hidden relative">
+    <div className="movie-card w-80 max-h-[30rem] flex flex-col bg-neutral-800 rounded-lg overflow-hidden relative shadow-md border-b-2 border-red-500 hover:shadow-red-500 transition duration-300 ease-in-out ">
       <div className="movie-poster relative">
         <img
           src={movie.url}
