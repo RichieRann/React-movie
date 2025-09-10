@@ -1,6 +1,7 @@
 import MovieCard from "../components/MovieCard"
 import { useState, useEffect } from "react"
 import { searchMovies, getPopularMovies } from "../services/api"
+import { ThreeDot } from "react-loading-indicators"
 
 const Home = () => {
   // const [inputValue, setInputValue] = useState("")
@@ -25,8 +26,23 @@ const Home = () => {
     loadPopularMovies()
   }, [])
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault()
+    if (!searchQuery.trim()) return
+    if (loading) return
+
+    setLoading(true)
+    try {
+      const searchResults = await searchMovies(searchQuery)
+      setMovies(searchResults)
+      setError(null)
+    } catch (error) {
+      setError("Failed to search movies")
+      console.error("Search Error:", error)
+    } finally {
+      setLoading(false)
+    }
+
     setSearchQuery(searchQuery)
   }
 
@@ -50,17 +66,29 @@ const Home = () => {
           </button>
         </form>
 
-        <div className="movie-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-          {movies.map(
-            (movie) =>
-              movie.title.toLowerCase().startsWith(searchQuery) && (
-                <MovieCard
-                  movie={movie}
-                  key={movie.id}
-                />
-              )
-          )}
-        </div>
+        {error && <div className="error mt-6 text-red-500">{error}</div>}
+        {loading ? (
+          <div className="loading mt-6">
+            <ThreeDot
+              color="#FF0000"
+              size="medium"
+              text=""
+              textColor=""
+            />
+          </div>
+        ) : (
+          <div className="movie-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 mt-6 animate-fade-up">
+            {movies.map(
+              (movie) =>
+                movie.title.toLowerCase().startsWith(searchQuery) && (
+                  <MovieCard
+                    movie={movie}
+                    key={movie.id}
+                  />
+                )
+            )}
+          </div>
+        )}
       </div>
     </>
   )

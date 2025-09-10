@@ -4,12 +4,12 @@ function MovieCard({ movie }) {
   }
 
   return (
-    <div className="movie-card w-80 max-h-[30rem] flex flex-col bg-neutral-800 rounded-lg overflow-hidden relative shadow-md border-b-2 border-red-500 hover:shadow-red-500 transition duration-300 ease-in-out ">
+    <div className="movie-card sm:w-80 sm:max-h-[35rem] flex flex-col bg-neutral-800 rounded-lg overflow-hidden relative shadow-md border-b-2 border-red-500 hover:shadow-red-500 transition duration-300 ease-in-out ">
       <div className="movie-poster relative">
         <img
-          src={movie.url}
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
-          className="w-full h-[24rem] object-cover"
+          className="w-full sm:h-[30rem] object-cover"
         />
         <button
           className="fav-btn absolute bottom-4 right-4 bg-black/60 text-red-500 text-2xl rounded-full size-8 hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
