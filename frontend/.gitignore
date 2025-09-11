@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 #Additional
-ApiKey.txt
+src/services/api.js
