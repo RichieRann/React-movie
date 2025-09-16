@@ -4,7 +4,7 @@ function MovieCard({ movie }) {
   }
 
   return (
-    <div className="movie-card sm:w-80 sm:max-h-[35rem] flex flex-col bg-neutral-800 rounded-lg overflow-hidden relative shadow-md border-b-2 border-red-500 hover:shadow-red-500 transition duration-300 ease-in-out ">
+    <div className="movie-card sm:w-80 flex flex-col bg-neutral-800 rounded-lg overflow-hidden relative shadow-md border-b-2 border-red-500 hover:shadow-red-500 transition duration-300 ease-in-out ">
       <div className="movie-poster relative">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -18,9 +18,11 @@ function MovieCard({ movie }) {
           ♥
         </button>
       </div>
-      <div className="movie-details p-4 flex flex-col gap-2">
-        <h3 className="text-lg font-semibold">{movie.title}</h3>
-        <p className="text-sm text-gray-400">{movie.release_date}</p>
+      <div className="movie-details h-full px-4 py-2 flex flex-col gap-2">
+        <h3 className="text-sm sm:text-xl font-semibold grow">{movie.title}</h3>
+        <p className="text-xs sm:text-sm text-gray-400 ">
+          {movie.release_date?.split("-")[0]}
+        </p>
       </div>
     </div>
   )

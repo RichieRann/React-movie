@@ -55,13 +55,13 @@ const Home = () => {
           <input
             type="text"
             placeholder="Search Movies..."
-            className="search-input w-2/2 sm:w-2/5 h-12 p-3 bg-neutral-700"
+            className="search-input text-sm sm:text-base w-2/2 sm:w-2/5 h-8 sm:h-12 p-3 bg-neutral-700 rounded"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button
             type="submit"
-            className="search-button text-center w-24 h-12 bg-red-600 text-white hover:bg-red-700 transition duration-300 ease-in-out">
+            className="search-button text-center text-sm sm:text-base w-24 h-8 sm:h-12 bg-red-600 text-white hover:bg-red-700 rounded transition duration-300 ease-in-out">
             Search
           </button>
         </form>
@@ -77,7 +77,7 @@ const Home = () => {
             />
           </div>
         ) : (
-          <div className="movie-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 mt-6 animate-fade-up">
+          <div className="movie-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 mt-6 animate-fade-up">
             {movies.map(
               (movie) =>
                 movie.title.toLowerCase().startsWith(searchQuery) && (
