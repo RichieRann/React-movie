@@ -3,7 +3,7 @@ import { createContext } from "react"
 
 const MovieContext = createContext()
 
-// If the app a larger scale App, this Hook needs a separate file so the Err Msg will not show
+// If the app a larger scale App, this Hook needs a separate file so the Err Msg will not show. (all fine for now)
 export const useMovieContext = () => useContext(MovieContext)
 
 // Provide state to any of the components that are wrapped around it (Allows the components hook in/allows to specific function/state when they need to use it)

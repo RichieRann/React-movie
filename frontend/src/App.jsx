@@ -6,7 +6,6 @@ import { MovieProvider } from "./contexts/MovieContext"
 import Navbar from "./components/Navbar"
 
 function App() {
-  // const movieNumber = 1
   return (
     <MovieProvider>
       <Navbar />
