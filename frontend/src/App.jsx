@@ -2,12 +2,13 @@ import "./css/tailwind.css"
 import Favorites from "./pages/Favorites"
 import Home from "./pages/Home"
 import { Routes, Route } from "react-router-dom"
+import { MovieProvider } from "./contexts/MovieContext"
 import Navbar from "./components/Navbar"
 
 function App() {
   // const movieNumber = 1
   return (
-    <div>
+    <MovieProvider>
       <Navbar />
       <main className="main-container">
         <Routes>
@@ -21,7 +22,7 @@ function App() {
           />
         </Routes>
       </main>
-    </div>
+    </MovieProvider>
   )
 }
 

@@ -1,6 +1,13 @@
+import { useMovieContext } from "../contexts/MovieContext"
+
 function MovieCard({ movie }) {
-  function onLoveClick() {
-    alert("clicked")
+  const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext()
+  const favorite = isFavorite(movie.id)
+
+  function onLoveClick(e) {
+    e.preventDefault()
+    if (favorite) removeFromFavorites(movie.id)
+    else addToFavorites(movie)
   }
 
   return (
@@ -12,7 +19,11 @@ function MovieCard({ movie }) {
           className="w-full sm:h-[30rem] object-cover"
         />
         <button
-          className="fav-btn absolute bottom-4 right-4 bg-black/60 text-red-500 text-2xl rounded-full size-8 hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
+          className={`fav-btn absolute bottom-4 right-4 cursor-pointer ${
+            favorite
+              ? "bg-red-500 text-white"
+              : "bg-black/60 text-red-500 hover:bg-red-500 hover:text-white hover:scale-110"
+          } text-2xl rounded-full size-8  transition duration-300 ease-in-out`}
           onClick={onLoveClick}
           aria-label="Add to favorites">
           ♥
